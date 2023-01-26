@@ -6,5 +6,6 @@ ThemeData AppTheme = ThemeData(
   primarySwatch: ThemeColors.primaryColor,
   primaryColor: ThemeColors.primaryColor,
   brightness: Brightness.dark,
+  fontFamily: 'Raleway',
   textTheme: appTextTheme,
 );
