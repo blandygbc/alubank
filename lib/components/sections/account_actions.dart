@@ -15,7 +15,7 @@ class AccountActions extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
             child: Text(
-              'Ações da conta',
+              'Account Actions',
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
