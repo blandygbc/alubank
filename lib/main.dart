@@ -1,3 +1,4 @@
+import 'package:alubank/data/bank_inherited.dart';
 import 'package:alubank/screens/home_screen.dart';
 import 'package:alubank/themes/dark_theme.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class AluBank extends StatelessWidget {
     return MaterialApp(
       title: 'AluBank',
       theme: AppTheme,
-      home: HomeScreen(),
+      home: BankInherited(child: const HomeScreen()),
     );
   }
 }
