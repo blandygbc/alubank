@@ -1,32 +1,56 @@
 import 'package:alubank/components/box_card.dart';
+import 'package:alubank/data/bank_http.mocks.dart';
 import 'package:alubank/data/bank_inherited.dart';
 import 'package:alubank/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 
 void main() {
-  testWidgets('My widget has a text "Spent"', (tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: BankInherited(child: const HomeScreen()),
+  final MockBankHttp httpMock = MockBankHttp();
+  testWidgets('Testing MockBankHttp dolarToReal', (testBot) async {
+    when(httpMock.dolarToReal()).thenAnswer((_) async => ('5'));
+    await testBot.pumpWidget(MaterialApp(
+      home: BankInherited(
+        child: HomeScreen(api: httpMock.dolarToReal()),
+      ),
+    ));
+    verify(httpMock.dolarToReal()).called(1);
+  });
+  testWidgets('My widget has a text "Spent"', (testBot) async {
+    when(httpMock.dolarToReal()).thenAnswer((_) async => ('5'));
+    await testBot.pumpWidget(MaterialApp(
+      home: BankInherited(
+        child: HomeScreen(api: httpMock.dolarToReal()),
+      ),
     ));
     final spentFinder = find.text('Spent');
     expect(spentFinder, findsOneWidget);
   });
-  testWidgets('finds a LinearProgressIndicator', (tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: BankInherited(child: const HomeScreen()),
+  testWidgets('finds a LinearProgressIndicator', (testBot) async {
+    when(httpMock.dolarToReal()).thenAnswer((_) async => ('5'));
+    await testBot.pumpWidget(MaterialApp(
+      home: BankInherited(
+        child: HomeScreen(api: httpMock.dolarToReal()),
+      ),
     ));
     expect(find.byType(LinearProgressIndicator), findsOneWidget);
   });
-  testWidgets('finds a AccountStatus', (tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: BankInherited(child: const HomeScreen()),
+  testWidgets('finds a AccountStatus', (testBot) async {
+    when(httpMock.dolarToReal()).thenAnswer((_) async => ('5'));
+    await testBot.pumpWidget(MaterialApp(
+      home: BankInherited(
+        child: HomeScreen(api: httpMock.dolarToReal()),
+      ),
     ));
     expect(find.byKey(const Key('testKey')), findsOneWidget);
   });
-  testWidgets('finds 5 BoxCards', (tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: BankInherited(child: const HomeScreen()),
+  testWidgets('finds 5 BoxCards', (testBot) async {
+    when(httpMock.dolarToReal()).thenAnswer((_) async => ('5'));
+    await testBot.pumpWidget(MaterialApp(
+      home: BankInherited(
+        child: HomeScreen(api: httpMock.dolarToReal()),
+      ),
     ));
     expect(find.byWidgetPredicate((widget) {
       if (widget is BoxCard) {
@@ -38,8 +62,11 @@ void main() {
   });
   testWidgets('When tap deposit should update Earned value by 10',
       (testBot) async {
+    when(httpMock.dolarToReal()).thenAnswer((_) async => ('5'));
     await testBot.pumpWidget(MaterialApp(
-      home: BankInherited(child: const HomeScreen()),
+      home: BankInherited(
+        child: HomeScreen(api: httpMock.dolarToReal()),
+      ),
     ));
     await testBot.tap(find.text('Deposit'));
     await testBot.tap(find.text('Earned'));

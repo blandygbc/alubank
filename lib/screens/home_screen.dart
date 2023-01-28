@@ -9,18 +9,19 @@ import 'package:alubank/themes/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final Future<String> api;
+  const HomeScreen({super.key, required this.api});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          children: const [
-            Header(),
-            RecentActivity(),
-            AccountActions(),
-            AccountPoints(),
+          children: [
+            Header(api: api),
+            const RecentActivity(),
+            const AccountActions(),
+            const AccountPoints(),
           ],
         ),
       ),

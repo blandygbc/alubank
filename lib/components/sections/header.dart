@@ -4,7 +4,9 @@ import 'package:alubank/themes/theme_colors.dart';
 import 'package:flutter/material.dart';
 
 class Header extends StatefulWidget {
-  const Header({super.key});
+  final Future<String> api;
+
+  const Header({super.key, required this.api});
 
   @override
   State<Header> createState() => _HeaderState();
@@ -55,7 +57,7 @@ class _HeaderState extends State<Header> {
               //   size: 42,
               // ),
               FutureBuilder(
-                  future: BankHttp().dolarToReal(),
+                  future: widget.api,
                   builder: (context, snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.none:
